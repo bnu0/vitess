@@ -113,6 +113,10 @@ type resourceWrapper struct {
 	timeUsed time.Time
 }
 
+func (rw resourceWrapper) IsExpired(idleTimeout time.Duration) bool {
+	return time.Since(rw.timeUsed) > idleTimeout
+}
+
 // NewStaticResourcePool creates a new StaticResourcePool ResourcePool.
 // capacity is the number of possible resources in the pool:
 // there can be up to 'capacity' of these at a given time.
